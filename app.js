@@ -30,7 +30,8 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use('/api/greeting', (request, response) => {
   const name = request.query ? request.query.name : undefined;
-  response.send({ content: `Hello, ${name || 'World!'}` });
+  const greeting = process.env.APP_GREETING ? process.env.APP_GREETING : "Hello";
+  response.send({ content: `${greeting}, ${name || 'World!'}` });
 });
 
 module.exports = app;
